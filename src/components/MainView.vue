@@ -101,7 +101,6 @@
         <div class="flex">
           <div>
             <input
-              class="w-full"
               type="checkbox"
               name="male"
               v-model="applicationData.sex.male"
@@ -164,7 +163,7 @@
           <div>
             <input
               type="checkbox"
-              name="otherVallue"
+              name="otherValue"
               v-model="applicationData.martialStatus.other"
             />
             <label for="other">Other</label>
@@ -852,19 +851,489 @@
           />
         </div>
       </div>
+
+      <!-- Company reference -->
+
+      <span
+        >Surname, first name, address, telephone, telefax, and e-mail address of
+        contact person in company/organisation</span
+      >
+      <div class="flex">
+        <div class="w-full">
+          <label for="surname">Surname</label>
+          <input
+            class="w-full"
+            type="text"
+            name="surname"
+            v-model="applicationData.companyReference.surname"
+          />
+        </div>
+        <div class="w-full">
+          <label for="firstName">First name</label>
+          <input
+            class="w-full"
+            type="text"
+            name="firstName"
+            v-model="applicationData.companyReference.firstName"
+          />
+        </div>
+        <div class="w-full">
+          <label for="address">Address</label>
+          <input
+            class="w-full"
+            type="text"
+            name="address"
+            v-model="applicationData.companyReference.address"
+          />
+        </div>
+        <div class="w-full">
+          <label for="phone">Phone</label>
+          <input
+            class="w-full"
+            type="text"
+            name="phone"
+            v-model="applicationData.companyReference.phone"
+          />
+        </div>
+        <div class="w-full">
+          <label for="fax">Fax</label>
+          <input
+            class="w-full"
+            type="text"
+            name="fax"
+            v-model="applicationData.companyReference.fax"
+          />
+        </div>
+        <div class="w-full">
+          <label for="email">E-mail</label>
+          <input
+            class="w-full"
+            type="email"
+            name="email"
+            v-model="applicationData.companyReference.email"
+          />
+        </div>
+      </div>
     </div>
 
     <!-- 33 -->
-    <!-- <div class="flex w-full bg-gray-100"></div> -->
+    <div class="flex flex-col w-full bg-gray-100">
+      <span
+        >*33. Cost of travelling and living during the applicant's stay is
+        covered</span
+      >
+      <div class="flex">
+        <div class="w-full flex flex-col">
+          <div class="mb-4">
+            <input
+              type="checkbox"
+              name="applicant"
+              v-model="applicationData.costsCoverage.applicant"
+            />
+            <label for="applicant">By the applicant himself/herself</label>
+          </div>
+
+          <span>Means of support</span>
+          <div>
+            <input
+              type="checkbox"
+              name="cash"
+              v-model="applicationData.costsCoverage.applicantTypes.cash"
+            />
+            <label for="cash">Cash</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name="checks"
+              v-model="applicationData.costsCoverage.applicantTypes.checks"
+            />
+            <label for="checks">Traveller's cheques</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name="creditCard"
+              v-model="applicationData.costsCoverage.applicantTypes.creditCard"
+            />
+            <label for="creditCard">Credit card</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name="accomodation"
+              v-model="
+                applicationData.costsCoverage.applicantTypes
+                  .prepaidAccommodation
+              "
+            />
+            <label for="accomodation">Pre-paid accommodation</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name="transport"
+              v-model="
+                applicationData.costsCoverage.applicantTypes.prepaidTransport
+              "
+            />
+            <label for="transport">Pre-paid transport</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name="other"
+              v-model="applicationData.costsCoverage.applicantTypes.other"
+            />
+            <label for="other">Other</label>
+          </div>
+          <div>
+            <label for="otherValue">(please specify)</label>
+            <input
+              class="w-full"
+              type="input"
+              name="otherValue"
+              v-model="applicationData.costsCoverage.applicantTypes.otherValue"
+            />
+          </div>
+        </div>
+
+        <div class="w-full">
+          <div class="mb-4">
+            <input
+              type="checkbox"
+              name="sponsor"
+              v-model="applicationData.costsCoverage.sponsor"
+            />
+            <label for="sponsor"
+              >by a sponsor (host, company, organisation), please specify</label
+            >
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name="referredSponsor"
+              v-model="applicationData.costsCoverage.referredPreviously"
+            />
+            <label for="referredSponsor">referred to in field 31 or 32</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name="other"
+              v-model="applicationData.costsCoverage.otherSponsors"
+            />
+            <label for="other">Other</label>
+          </div>
+          <div class="mb-4">
+            <label for="otherSponsorsValue">(please specify)</label>
+            <input
+              class="w-full"
+              type="input"
+              name="otherSponsorsValue"
+              v-model="applicationData.costsCoverage.otherSponsorsValue"
+            />
+          </div>
+
+          <span>Means of support</span>
+          <div>
+            <input
+              type="checkbox"
+              name="cash"
+              v-model="applicationData.costsCoverage.sponsorTypes.cash"
+            />
+            <label for="cash">Cash</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name="accommodation"
+              v-model="applicationData.costsCoverage.sponsorTypes.accommodation"
+            />
+            <label for="accommodation">Accommodation provided</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name="allCovered"
+              v-model="applicationData.costsCoverage.sponsorTypes.allCovered"
+            />
+            <label for="allCovered">All expenses covered during the stay</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name="prepaidTransport"
+              v-model="
+                applicationData.costsCoverage.sponsorTypes.prepaidTransport
+              "
+            />
+            <label for="prepaidTransport">Pre-paid transport</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              name="other"
+              v-model="applicationData.costsCoverage.sponsorTypes.other"
+            />
+            <label for="other">Other</label>
+          </div>
+          <div>
+            <label for="otherValue">(please specify)</label>
+            <input
+              class="w-full"
+              type="input"
+              name="otherValue"
+              v-model="applicationData.costsCoverage.sponsorTypes.otherValue"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- 34 -->
-    <!-- <div class="flex w-full bg-gray-100"></div> -->
+    <div class="flex flex-col w-full bg-gray-100">
+      <span
+        >34. Personal data of the family member who is an EU, EEA or CH
+        citizen</span
+      >
+      <div class="flex">
+        <div class="w-full flex flex-col">
+          <label for="surname">Surname</label>
+          <input
+            type="text"
+            name="surname"
+            v-model="applicationData.familyMember.surname"
+          />
+        </div>
+        <div class="w-full flex flex-col">
+          <label for="firstName">First name</label>
+          <input
+            type="text"
+            name="firstName"
+            v-model="applicationData.familyMember.firstName"
+          />
+        </div>
+      </div>
+      <div class="flex">
+        <div class="w-full flex flex-col">
+          <label for="birthDate">Date of birth</label>
+          <input
+            type="date"
+            name="birthDate"
+            v-model="applicationData.familyMember.dateOfBirth"
+          />
+        </div>
+        <div class="w-full flex flex-col">
+          <label for="nationality">Nationality</label>
+          <input
+            type="text"
+            name="nationality"
+            v-model="applicationData.familyMember.nationality"
+          />
+        </div>
+        <div class="w-full flex flex-col">
+          <label for="documentNumber"
+            >Number of travel document or ID card</label
+          >
+          <input
+            type="text"
+            name="documentNumber"
+            v-model="applicationData.familyMember.documentNumber"
+          />
+        </div>
+      </div>
+    </div>
 
     <!-- 35 -->
-    <!-- <div class="flex w-full bg-gray-100"></div> -->
+    <div class="flex flex-col w-full bg-gray-100">
+      <span>35. Family relationship with an EU, EEA or CH citizen</span>
+      <div class="flex">
+        <div class="w-full">
+          <input
+            type="checkbox"
+            name="spouse"
+            v-model="applicationData.relationshipType.spouse"
+          />
+          <label for="spouse">Spouse</label>
+        </div>
+        <div class="w-full">
+          <input
+            type="checkbox"
+            name="child"
+            v-model="applicationData.relationshipType.grandchild"
+          />
+          <label for="child">Child</label>
+        </div>
+        <div class="w-full">
+          <input
+            type="checkbox"
+            name="grandchild"
+            v-model="applicationData.relationshipType.child"
+          />
+          <label for="grandchild">Grandchild</label>
+        </div>
+        <div class="w-full">
+          <input
+            type="checkbox"
+            name="dependent"
+            v-model="applicationData.relationshipType.dependent"
+          />
+          <label for="dependent">Dependent ascendant</label>
+        </div>
+      </div>
+    </div>
 
     <!-- 36 -->
-    <!-- <div class="flex w-full bg-gray-100"></div> -->
+    <div class="flex w-full bg-gray-100">
+      <div class="w-full flex flex-col">
+        <div class="w-full">
+          <label for="place">Place</label>
+          <input
+            class="w-full"
+            type="input"
+            name="place"
+            v-model="applicationData.place"
+          />
+        </div>
+        <div class="w-full">
+          <label for="date">Date</label>
+          <input
+            class="w-full"
+            type="date"
+            name="date"
+            v-model="applicationData.date"
+          />
+        </div>
+      </div>
+      <div class="w-full">
+        <span>Signature</span>
+      </div>
+    </div>
+
+    <!-- Acceptance area -->
+    <div class="flex flex-col w-full space-y-4 bg-gray-100">
+      <div class="w-full flex-col">
+        <input type="checkbox" v-model="applicationData.visaFeeAcceptance" />
+        <span
+          >I am aware that the visa fee is not refunded if the visa is
+          refused.</span
+        >
+      </div>
+
+      <div class="w-full flex-col">
+        <input type="checkbox" v-model="applicationData.insuranceAccepance" />
+        <span
+          >Applicable in case a multiple-entry visa is applied for (cf. field no
+          24): I am aware of the need to have an adequate travel medical
+          insurance for my first stay and any subsequent visits to the territory
+          of Member States.</span
+        >
+      </div>
+
+      <div class="w-full flex-col">
+        <input
+          type="checkbox"
+          v-model="applicationData.personalDataProcessingAcceptance"
+        />
+        <span
+          >Applicable in case a multiple-entry visa is applied for (cf. field no
+          24): I am aware of the need to have an adequate travel medical
+          insurance for my first stay and any subsequent visits to the territory
+          of Member States. INFORMATION ON THE PROCESSING OF PERSONAL DATA The
+          collection of the data required by this application form, the taking
+          of your photograph and, if applicable, the taking of your
+          fingerprints, are mandatory for the examination of the visa
+          application; and any personal data concerning you which appear on the
+          visa application form, as well as your fingerprints and your
+          photograph will be supplied to the relevant authorities of the Member
+          States and processed by those authorities, for the purposes of a
+          decision on your visa application. Such data as well as data
+          concerning the decision taken on your application or a decision
+          whether to annul, revoke or extend a visa issued will be entered into,
+          and stored, in the Visa Information System (VIS) for a maximum period
+          of five years, during which it will be accessible to the visa
+          authorities and the authorities competent for carrying out checks on
+          visas at external borders and within the Member States, immigration
+          and asylum authorities in the Member States for the purposes of
+          verifying whether the conditions for the legal entry into, stay and
+          residence on the territory of the Member States are fulfilled, of
+          identifying persons who do not or who no longer fulfil these
+          conditions, of examining an asylum application and of determining
+          responsibility for such examination. Under certain conditions the data
+          will be also available to designated authorities of the Member States
+          (for Italy: the Ministry of Interior and the Police authority) and to
+          Europol for the purpose of the prevention, detection and investigation
+          of terrorist offences and of other serious criminal offences. The
+          Ministry of Foreign Affairs and International Cooperation (Piazzale
+          della Farnesina 1, 00135 Roma, www.esteri.it, dgit6@esteri.it) is the
+          Italian authority responsible (controller) for processing the data.
+          You have the right to obtain in any of the Member States communication
+          of the data relating to you recorded in the VIS and of the Member
+          State which transmitted the data, and to request that the data
+          relating to you which are inaccurate be corrected, and that the data
+          relating to you processed unlawfully be deleted. For information on
+          the exercise of your right to check your personal data and have them
+          corrected or deleted, as well as on legal remedies according to the
+          national law of the State concerned, see www.esteri.it and
+          www.vistoperitalia.esteri.it. Further information will be provided
+          upon request by the authority examining your application. The Italian
+          national supervisory competent authority on the protection of personal
+          data is the Italian Authority for Data Protection (Piazza di
+          Montecitorio 121, 00186 Roma, www.garanteprivacy.it; tel.: +3906
+          696771).</span
+        >
+      </div>
+
+      <div class="w-full flex-col">
+        <input type="checkbox" v-model="applicationData.finalAcceptance" />
+        <span
+          >I declare that to the best of my knowledge all particulars supplied
+          by me are correct and complete. I am aware that any false statements
+          involve my application being rejected or to the annulment of a visa
+          already granted and may result in prosecution under the law of the
+          Member State that process the application. I undertake to leave the
+          territory of the Member States before the expiry of the visa, if
+          granted. I am aware that possession of a visa is only one of the
+          prerequisites for entry into the European territory of the Member
+          States. The mere granting of a visa does not entitle me to
+          compensation if I fail to fulfil the conditions of Article 5 ,
+          paragraph 1, of the Council Regulation n. 562/2006 (Schengen Borders
+          Code) and I am thus refused entry. The prerequisites for entry will be
+          checked again on entry into the European territory of the Member
+          States.</span
+        >
+      </div>
+    </div>
+
+    <div class="flex w-full bg-gray-100">
+      <div class="w-full flex flex-col">
+        <div class="w-full">
+          <label for="place">Place</label>
+          <input
+            class="w-full"
+            type="input"
+            name="place"
+            v-model="applicationData.place"
+          />
+        </div>
+        <div class="w-full">
+          <label for="date">Date</label>
+          <input
+            class="w-full"
+            type="date"
+            name="date"
+            v-model="applicationData.date"
+          />
+        </div>
+      </div>
+      <div class="w-full">
+        <span
+          >Signature (for minors, signature of parental authority/legal
+          guardian):</span
+        >
+      </div>
+    </div>
   </div>
 </template>
 
@@ -992,56 +1461,57 @@ export default {
           phone: "",
           fax: "",
         },
-        // companyReference: {
-        //   firstName: "",
-        //   surname: "",
-        //   address: "",
-        //   phone: "",
-        //   email: "",
-        // },
-        // costsCoverage: {
-        //   applicant: false,
-        //   applicantTypes: {
-        //     cash: false,
-        //     check: false,
-        //     creditCard: false,
-        //     prepaidAccommodation: false,
-        //     prepaidTransport: false,
-        //     other: false,
-        //     otherValue: "",
-        //   },
-        //   sponsor: false,
-        //   referredPreviously: false,
-        //   otherSponsors: false,
-        //   otherSponsorsValue: "",
-        //   sponsorTypes: {
-        //     cash: false,
-        //     accomodation: false,
-        //     allCovered: false,
-        //     prepaidTransport: false,
-        //     other: false,
-        //     otherValue: "",
-        //   },
-        //   familyMember: {
-        //     surname: "",
-        //     firstName: "",
-        //     dateOfBirth: "", // type date
-        //     nationality: "",
-        //     documentNumber: "",
-        //   },
-        //   relationshipType: {
-        //     spouse: false,
-        //     child: false,
-        //     grandchild: false,
-        //     dependent: false,
-        //   },
-        //   place: "", // *shared info in two sections
-        //   date: "", // type date *shared info in two sections
-        //   visaFeeAcceptance: false, // mandatory
-        //   insuranceAccepance: false, // mandatory
-        //   personalDataProcessingAcceptance: false, // mandatory
-        //   finalAcceptance: false, // mandatory
-        // },
+        companyReference: {
+          firstName: "",
+          surname: "",
+          address: "",
+          phone: "",
+          fax: "",
+          email: "",
+        },
+        costsCoverage: {
+          applicant: false,
+          applicantTypes: {
+            cash: false,
+            check: false,
+            creditCard: false,
+            prepaidAccommodation: false,
+            prepaidTransport: false,
+            other: false,
+            otherValue: "",
+          },
+          sponsor: false,
+          referredPreviously: false,
+          otherSponsors: false,
+          otherSponsorsValue: "",
+          sponsorTypes: {
+            cash: false,
+            accomodation: false,
+            allCovered: false,
+            prepaidTransport: false,
+            other: false,
+            otherValue: "",
+          },
+        },
+        familyMember: {
+          surname: "",
+          firstName: "",
+          dateOfBirth: "", // type date
+          nationality: "",
+          documentNumber: "",
+        },
+        relationshipType: {
+          spouse: false,
+          child: false,
+          grandchild: false,
+          dependent: false,
+        },
+        place: "", // *shared info in two sections
+        date: "", // type date *shared info in two sections
+        visaFeeAcceptance: false, // mandatory
+        insuranceAccepance: false, // mandatory
+        personalDataProcessingAcceptance: false, // mandatory
+        finalAcceptance: false, // mandatory
       },
     };
   },
