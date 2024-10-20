@@ -1,5 +1,5 @@
 <template>
-  <div id="target">
+  <div id="target" ref="target">
     <div class="flex h-full flex-1 flex-col space-y-8 p-8">
       <div class="text-2xl">Application for Schengen Visa</div>
       <!-- flag image -->
@@ -17,7 +17,9 @@
       </div>
 
       <!-- Has to be hidden on print -->
-      <div class="flex flex-col text-xs space-y-2 border-l border-gray-600 pl-2">
+      <div
+        class="flex flex-col text-xs space-y-2 border-l border-gray-600 pl-2"
+      >
         <span>&#9888; Important</span>
         <span>
           The fields marked with * shall not be filled in by family members of
@@ -33,7 +35,9 @@
       <div
         class="flex flex-col border p-1 border-gray-300 rounded-md bg-gray-100"
       >
-        <span class="text-sm font-medium mb-2">1. Surname (family name) (x)</span>
+        <span class="text-sm font-medium mb-2"
+          >1. Surname (family name) (x)</span
+        >
         <div class="border border-gray-300 rounded-md px-2">
           <input
             class="w-full bg-transparent focus:outline-none"
@@ -45,7 +49,9 @@
       <div
         class="flex flex-col border p-1 border-gray-300 rounded-md bg-gray-100"
       >
-        <span class="text-sm font-medium mb-2">2. Surname at birth (Former family name(s)) (x)</span>
+        <span class="text-sm font-medium mb-2"
+          >2. Surname at birth (Former family name(s)) (x)</span
+        >
         <div class="border border-gray-300 rounded-md px-2">
           <input
             class="w-full bg-transparent focus:outline-none"
@@ -57,7 +63,9 @@
       <div
         class="flex flex-col border p-1 border-gray-300 rounded-md bg-gray-100"
       >
-        <span class="text-sm font-medium mb-2">3. First name(s) (Given name(s)) (x)</span>
+        <span class="text-sm font-medium mb-2"
+          >3. First name(s) (Given name(s)) (x)</span
+        >
         <div class="border border-gray-300 rounded-md px-2">
           <input
             class="w-full bg-transparent focus:outline-none"
@@ -1398,6 +1406,8 @@
 </template>
 
 <script>
+import html2pdf from "html2pdf.js";
+
 export default {
   name: "MainView",
   components: {},
@@ -1579,6 +1589,15 @@ export default {
   methods: {
     onPrint() {
       console.log("print requested");
+      const element = this.$refs.target;
+      const options = {
+        margin: 1,
+        filename: `${this.applicationData.firstName}-${this.applicationData.lastName}-application`,
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
+      };
+      html2pdf().from(element).set(options).save();
     },
     onReset() {
       console.log("reset requested");
