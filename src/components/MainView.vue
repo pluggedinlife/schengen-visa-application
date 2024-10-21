@@ -1407,6 +1407,7 @@
 
 <script>
 import html2pdf from "html2pdf.js";
+import printTemplate from "./templates/template.js";
 
 export default {
   name: "MainView",
@@ -1586,6 +1587,13 @@ export default {
       },
     };
   },
+  mounted() {
+    console.log("mounted");
+    console.log(printTemplate);
+    console.log(printTemplate.replace("{{ title }}", "MISHA"));
+    // this.loadTemplate();
+  },
+
   methods: {
     onPrint() {
       console.log("print requested");
@@ -1602,6 +1610,16 @@ export default {
     onReset() {
       console.log("reset requested");
     },
+    // async loadTemplate() {
+    //   try {
+    //     const response = await fetch("./templates/template.html"); // Adjust the path
+    //     const text = await response.text();
+    //     console.log("text loaded", text);
+    //     // this.pdfContent = text.replace('{{ title }}', this.title); // Replace placeholders
+    //   } catch (error) {
+    //     console.error("Error loading template:", error);
+    //   }
+    // },
   },
 };
 </script>

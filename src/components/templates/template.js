@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+const template = `<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -10,3 +10,6 @@
     <p>This content will be included in the PDF.</p>
   </body>
 </html>
+`;
+
+export default template;
