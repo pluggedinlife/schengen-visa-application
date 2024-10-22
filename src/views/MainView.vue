@@ -32,96 +32,54 @@
       </div>
 
       <!-- 1,2,3 -->
-      <div
-        class="flex flex-col border p-1 border-gray-300 rounded-md bg-gray-100"
-      >
-        <span class="text-sm font-medium mb-2"
-          >1. Surname (family name) (x)</span
-        >
-        <div class="border border-gray-300 rounded-md px-2">
-          <input
-            class="w-full bg-transparent focus:outline-none"
-            type="text"
-            v-model="applicationData.surname"
-          />
-        </div>
-      </div>
-      <div
-        class="flex flex-col border p-1 border-gray-300 rounded-md bg-gray-100"
-      >
-        <span class="text-sm font-medium mb-2"
-          >2. Surname at birth (Former family name(s)) (x)</span
-        >
-        <div class="border border-gray-300 rounded-md px-2">
-          <input
-            class="w-full bg-transparent focus:outline-none"
-            type="text"
-            v-model="applicationData.surnameAtBirth"
-          />
-        </div>
-      </div>
-      <div
-        class="flex flex-col border p-1 border-gray-300 rounded-md bg-gray-100"
-      >
-        <span class="text-sm font-medium mb-2"
-          >3. First name(s) (Given name(s)) (x)</span
-        >
-        <div class="border border-gray-300 rounded-md px-2">
-          <input
-            class="w-full bg-transparent focus:outline-none"
-            type="text"
-            v-model="applicationData.firstName"
-          />
-        </div>
-      </div>
+      <InputText
+        label="1. Surname (family name) (x)"
+        v-model="applicationData.surname"
+        uid="lastName"
+      />
+      <InputText
+        label="2. Surname at birth (Former family name(s)) (x)"
+        v-model="applicationData.surnameAtBirth"
+        uid="surnameAtBirth"
+      />
+      <InputText
+        label="3. First name(s) (Given name(s)) (x)"
+        v-model="applicationData.firstName"
+        uid="firstName"
+      />
 
       <!-- 4,5,6,7 -->
-      <!-- <div class="flex w-full">
-        <div class="flex flex-col bg-gray-100 w-full">
-          <span>4. Date of birth (day-month-year)</span>
-          <input
-            class="w-full"
-            type="date"
-            v-model="applicationData.dateOfBirth"
+      <div class="flex w-full">
+        <InputDate
+          label="4. Date of birth (day-month-year)"
+          v-model="applicationData.dateOfBirth"
+          uid="dateOfBirth"
+        />
+        <div class="flex flex-col w-full">
+          <InputText
+            label="5. Place of birth"
+            v-model="applicationData.placeOfBirth"
+            uid="placeOfBirth"
+          />
+          <InputText
+            label="6. Country of birth"
+            v-model="applicationData.countryOfBirth"
+            uid="countryOfBirth"
           />
         </div>
         <div class="flex flex-col w-full">
-          <div class="flex flex-col bg-gray-100">
-            <span>5. Place of birth</span>
-            <input
-              class="w-full"
-              type="text"
-              v-model="applicationData.placeOfBirth"
-            />
-          </div>
-          <div class="flex flex-col bg-gray-100">
-            <span>6. Country of birth</span>
-            <input
-              class="w-full"
-              type="text"
-              v-model="applicationData.countryOfBirth"
-            />
-          </div>
+          <InputText
+            label="7. Current nationality"
+            v-model="applicationData.currentNationality"
+            uid="currentNationality"
+          />
+          <InputText
+            label="Nationality at birth (if different)"
+            v-model="applicationData.nationalityAtBirth"
+            uid="nationalityAtBirth"
+          />
         </div>
-        <div class="flex flex-col w-full">
-          <div class="flex flex-col bg-gray-100">
-            <span>7. Current nationality</span>
-            <input
-              class="w-full"
-              type="text"
-              v-model="applicationData.currentNationality"
-            />
-          </div>
-          <div class="flex flex-col bg-gray-100">
-            <span>Nationality at birth (if different)</span>
-            <input
-              class="w-full"
-              type="text"
-              v-model="applicationData.nationalityAtBirth"
-            />
-          </div>
-        </div>
-      </div> -->
+      </div>
 
       <!-- 8,9 -->
       <!-- <div class="flex w-full">
@@ -1407,11 +1365,13 @@
 
 <script>
 import html2pdf from "html2pdf.js";
-import printTemplate from "./templates/template.js";
+// import printTemplate from "../templates/template.js";
+import InputText from "../components/InputText.vue";
+import InputDate from "../components/InputDate.vue";
 
 export default {
   name: "MainView",
-  components: {},
+  components: { InputText, InputDate },
   data() {
     return {
       applicationData: {
@@ -1588,9 +1548,9 @@ export default {
     };
   },
   mounted() {
-    console.log("mounted");
-    console.log(printTemplate);
-    console.log(printTemplate.replace("{{ title }}", "MISHA"));
+    // console.log("mounted");
+    // console.log(printTemplate);
+    // console.log(printTemplate.replace("{{ title }}", "MISHA"));
     // this.loadTemplate();
   },
 
