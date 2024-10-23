@@ -82,27 +82,35 @@
       </div>
 
       <!-- 8,9 -->
-      <!-- <div class="flex w-full">
+      <div class="flex w-full">
         <div class="flex flex-col w-full bg-gray-100">
-          <span>8. Sex</span>
+          <InputSelect
+            label="8. Sex"
+            v-model="applicationData.sex"
+            uid="sex"
+            name="sex"
+            :options="sexOptions"
+          />
+          <!-- <span>8. Sex</span>
           <div class="flex">
             <div>
               <input
-                type="checkbox"
-                name="male"
+                id="male"
+                type="radio"
                 v-model="applicationData.sex.male"
               />
               <label for="male">Male</label>
             </div>
+
             <div>
               <input
-                type="checkbox"
-                name="female"
+                id="female"
+                type="radio"
                 v-model="applicationData.sex.female"
               />
               <label for="female">Female</label>
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="flex flex-col w-full bg-gray-100">
           <span>9. Martial status</span>
@@ -165,7 +173,7 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
 
       <!-- 10,11 -->
       <!-- <div class="flex flex-col bg-gray-100">
@@ -1366,12 +1374,13 @@
 <script>
 import html2pdf from "html2pdf.js";
 // import printTemplate from "../templates/template.js";
-import InputText from "../components/InputText.vue";
-import InputDate from "../components/InputDate.vue";
+import InputText from "@/components/InputText.vue";
+import InputDate from "@/components/InputDate.vue";
+import InputSelect from "@/components/InputSelect.vue";
 
 export default {
   name: "MainView",
-  components: { InputText, InputDate },
+  components: { InputText, InputDate, InputSelect },
   data() {
     return {
       applicationData: {
@@ -1383,10 +1392,11 @@ export default {
         countryOfBirth: "",
         currentNationality: "",
         nationalityAtBirth: "", // optional
-        sex: {
-          male: false,
-          female: false,
-        },
+        // sex: {
+        //   male: false,
+        //   female: false,
+        // },
+        sex: "",
         martialStatus: {
           single: false,
           married: false,
@@ -1545,6 +1555,10 @@ export default {
         personalDataProcessingAcceptance: false, // mandatory
         finalAcceptance: false, // mandatory
       },
+      sexOptions: [
+        { name: "Male", value: "male" },
+        { name: "Female", value: "female" },
+      ],
     };
   },
   mounted() {
@@ -1553,7 +1567,6 @@ export default {
     // console.log(printTemplate.replace("{{ title }}", "MISHA"));
     // this.loadTemplate();
   },
-
   methods: {
     onPrint() {
       console.log("print requested");
