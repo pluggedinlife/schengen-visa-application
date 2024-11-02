@@ -1,8 +1,9 @@
 <template>
   <div class="flex flex-col border p-1 border-gray-300 rounded-md bg-gray-100">
     <label :for="uid" class="text-sm font-medium mb-2">{{ label }}</label>
-    <div class="border bg-white border-gray-300 rounded-md px-2">
+    <div class="border bg-white border-gray-300 rounded-md">
       <select
+        class="w-full"
         :name="name"
         :id="uid"
         @input="$emit('update:modelValue', $event.target.value)"
