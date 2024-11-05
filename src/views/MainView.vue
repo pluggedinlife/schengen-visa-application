@@ -351,7 +351,7 @@ address of educational establishment."
         </div>
         <div class="flex flex-col w-full">
           <InputText
-            label="25. Duration of the intended stay or transit"
+            label="25. Duration of the intended stay or transit (indicate in days)"
             v-model="applicationData.duration"
             uid="duration"
             type-field="number"
@@ -362,637 +362,334 @@ address of educational establishment."
       <!-- PAGE 2 -->
 
       <!-- 26 -->
-      <!-- <div class="flex w-full">
-        <div class="flex flex-col w-full ">
-          <span>26. Schengen visas issued during the past three years</span>
-          <div class="flex">
-            <div>
-              <input
-                type="checkbox"
-                name="no"
-                v-model="applicationData.previousVisas.no"
-              />
-              <label for="no">No</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="yes"
-                v-model="applicationData.previousVisas.yes"
-              />
-              <label for="yes">Yes</label>
-            </div>
-            <div class="w-full">
-              <label for="issuedOn">Valid from</label>
-              <input
-                class="w-full"
-                type="date"
-                name="issuedOn"
-                v-model="applicationData.previousVisas.issuedOn"
-              />
-            </div>
-            <div class="w-full">
-              <label for="expiresOn">to</label>
-              <input
-                class="w-full"
-                type="date"
-                name="expiresOn"
-                v-model="applicationData.previousVisas.expiresOn"
-              />
-            </div>
+      <div class="flex flex-col w-full">
+        <div class="w-full">
+          <InputSelect
+            label="26. Schengen visas issued during the past three years"
+            v-model="applicationData.previousVisas"
+            uid="previousVisas"
+            name="previousVisas"
+            :options="yesNoOptions"
+          />
+        </div>
+        <div v-if="applicationData.previousVisas == 'yes'" class="flex w-full">
+          <div class="w-full">
+            <InputDate
+              label="Issued on"
+              v-model="applicationData.previousVisasIssuedOn"
+              uid="previousVisasIssuedOn"
+            />
+          </div>
+
+          <div class="w-full">
+            <InputDate
+              label="Expires on"
+              v-model="applicationData.previousVisasExpiresOn"
+              uid="previousVisasExpiresOn"
+            />
           </div>
         </div>
-      </div> -->
+      </div>
 
       <!-- 27 -->
-      <!-- <div class="flex w-full">
-        <div class="flex flex-col w-full ">
-          <span
-            >27.Fingerprints collected previously for the purpose of applying
-            for a Schengen visa</span
-          >
-          <div class="flex">
-            <div>
-              <input
-                type="checkbox"
-                name="no"
-                v-model="applicationData.fingerprintsCollected.no"
-              />
-              <label for="no">No</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="yes"
-                v-model="applicationData.fingerprintsCollected.yes"
-              />
-              <label for="yes">Yes</label>
-            </div>
-            <div>
-              <label for="issuedOn">Date if known</label>
-              <input
-                class="w-full"
-                type="date"
-                name="issuedOn"
-                v-model="applicationData.fingerprintsCollected.collectedOn"
-              />
-            </div>
-          </div>
+      <div class="flex flex-col w-full">
+        <div class="w-full">
+          <InputSelect
+            label="27.Fingerprints collected previously for the purpose of applying
+            for a Schengen visa"
+            v-model="applicationData.fingerprintsCollected"
+            uid="fingerprintsCollected"
+            name="fingerprintsCollected"
+            :options="yesNoOptions"
+          />
         </div>
-      </div> -->
+
+        <div
+          v-if="applicationData.fingerprintsCollected == 'yes'"
+          class="w-full"
+        >
+          <InputDate
+            label="Date if known"
+            v-model="applicationData.fingerprintsCollectionDate"
+            uid="fingerprintsCollectionDate"
+          />
+        </div>
+      </div>
 
       <!-- 28 -->
-      <!-- <div class="flex flex-col ">
-        <span
-          >28. Entry permit for the final country of destination, where
-          applicable</span
-        >
-        <div class="flex">
-          <div class="w-full">
-            <label for="issuedBy">Issued by</label>
-            <input
-              class="w-full"
-              type="input"
-              name="issuedBy"
-              v-model="applicationData.finalCountryEntry.issuedBy"
-            />
-          </div>
-          <div class="w-full">
-            <label for="validFrom">Valid from</label>
-            <input
-              class="w-full"
-              type="date"
-              name="validFrom"
-              v-model="applicationData.finalCountryEntry.issuedOn"
-            />
-          </div>
-          <div class="w-full">
-            <label for="expiresOn">to</label>
-            <input
-              class="w-full"
-              type="date"
-              name="expiresOn"
-              v-model="applicationData.finalCountryEntry.expiresOn"
-            />
-          </div>
+      <div class="flex">
+        <div class="w-full">
+          <InputText
+            label="28. Entry permit for the final country of destination issued by (where applicable)"
+            v-model="applicationData.finalCountryEntryPermitIssuedBy"
+            uid="finalCountryEntryPermitIssuedBy"
+          />
         </div>
-      </div> -->
+        <div class="w-full">
+          <InputDate
+            label="Issued on"
+            v-model="applicationData.finalCountryEntryPermitIssuedOn"
+            uid="finalCountryEntryPermitIssuedOn"
+          />
+        </div>
+        <div class="w-full">
+          <InputDate
+            label="Expires on"
+            v-model="applicationData.finalCountryEntryPermitExpiresOn"
+            uid="finalCountryEntryPermitExpiresOn"
+          />
+        </div>
+      </div>
 
       <!-- 29,30 -->
-      <!-- <div class="flex w-full ">
-        <div>
-          <span>29. Intended date of arrival in the Schengen area</span>
-          <input
-            class="w-full"
-            type="date"
+      <div class="flex w-full">
+        <div class="w-full">
+          <InputDate
+            label="29. Intended date of arrival in the Schengen area"
             v-model="applicationData.dateOfArrival"
+            uid="dateOfArrival"
           />
         </div>
-        <div>
-          <span> 30. Intended date of departure from the Schengen area </span>
-          <input
-            class="w-full"
-            type="date"
+
+        <div class="w-full">
+          <InputDate
+            label="30. Intended date of departure from the Schengen area"
             v-model="applicationData.dateOfDeparture"
+            uid="dateOfDeparture"
           />
         </div>
-      </div> -->
+      </div>
 
       <!-- 31 -->
-      <!-- <div class="flex flex-col w-full ">
-        <span
-          >* 31. Surname and first name of the inviting person(s) in the Member
-          State(s)</span
-        >
-        <div class="flex">
-          <div class="w-full">
-            <label for="firstName">First name</label>
-            <input
-              class="w-full"
-              type="text"
-              name="firstName"
-              v-model="applicationData.invitingPerson.firstName"
-            />
-          </div>
-          <div class="w-full">
-            <label for="surname">Surname</label>
-            <input
-              class="w-full"
-              type="text"
-              name="surname"
-              v-model="applicationData.invitingPerson.surname"
-            />
-          </div>
-          <div class="w-full">
-            <label for="address">Address</label>
-            <input
-              class="w-full"
-              type="text"
-              name="address"
-              v-model="applicationData.invitingPerson.address"
-            />
-          </div>
-          <div class="w-full">
-            <label for="email">Email</label>
-            <input
-              class="w-full"
-              type="email"
-              name="email"
-              v-model="applicationData.invitingPerson.email"
-            />
-          </div>
+      <div class="flex flex-col w-full">
+        <div class="w-full">
+          <InputText
+            label="31. Surname and first name of the inviting person(s) in the Member
+          State(s)"
+            v-model="
+              applicationData.invitingPersonFullNameOrTemporaryAccomodation
+            "
+            uid="invitingPersonFullNameOrTemporaryAccomodation"
+          />
         </div>
-
-   
-
-        <span
-          >If not applicable, name of hotel(s) or temporary accommodation(s) in
-          the Member State(s)</span
-        >
-        <div class="flex">
-          <div class="w-full">
-            <label for="address">Address</label>
-            <input
-              class="w-full"
-              type="text"
-              name="address"
-              v-model="applicationData.accomodation.address"
-            />
-          </div>
-          <div class="w-full">
-            <label for="email">Email</label>
-            <input
-              class="w-full"
-              type="email"
-              name="email"
-              v-model="applicationData.accomodation.email"
-            />
-          </div>
+        <div class="w-full flex">
+          <InputText
+            class="w-full"
+            label="Address of inviting person(s)/hotel(s)/temporary accommodation(s)"
+            v-model="
+              applicationData.invitingPersonOrTemporaryAccomodationAddress
+            "
+            uid="invitingPersonOrTemporaryAccomodationAddress"
+          />
+          <InputText
+            class="w-full"
+            type-field="email"
+            label="Email address of inviting person(s)/hotel(s)/temporary accommodation(s)"
+            v-model="applicationData.invitingPersonOrTemporaryAccomodationEmail"
+            uid="invitingPersonOrTemporaryAccomodationEmail"
+          />
         </div>
-      </div> -->
-
-      <!-- 32 -->
-      <!-- <div class="flex flex-col w-full ">
-        <span>*32. Name and address of inviting company/organisation</span>
-        <div class="flex">
-          <div class="w-full">
-            <label for="name">Name</label>
-            <input
-              class="w-full"
-              type="text"
-              name="name"
-              v-model="applicationData.invitingCompany.name"
-            />
-          </div>
-          <div class="w-full">
-            <label for="address">Address</label>
-            <input
-              class="w-full"
-              type="text"
-              name="address"
-              v-model="applicationData.invitingCompany.address"
-            />
-          </div>
-          <div class="w-full">
-            <label for="phone">Phone number</label>
-            <input
-              class="w-full"
-              type="text"
-              name="phone"
-              v-model="applicationData.invitingCompany.phone"
-            />
-          </div>
-          <div class="w-full">
-            <label for="fax">Fax</label>
-            <input
-              class="w-full"
-              type="text"
-              name="fax"
-              v-model="applicationData.invitingCompany.fax"
-            />
-          </div>
-        </div> -->
+      </div>
 
       <!-- Company reference -->
 
-      <!--   <span
-          >Surname, first name, address, telephone, telefax, and e-mail address
-          of contact person in company/organisation</span
-        >
-        <div class="flex">
-          <div class="w-full">
-            <label for="surname">Surname</label>
-            <input
-              class="w-full"
-              type="text"
-              name="surname"
-              v-model="applicationData.companyReference.surname"
-            />
-          </div>
-          <div class="w-full">
-            <label for="firstName">First name</label>
-            <input
-              class="w-full"
-              type="text"
-              name="firstName"
-              v-model="applicationData.companyReference.firstName"
-            />
-          </div>
-          <div class="w-full">
-            <label for="address">Address</label>
-            <input
-              class="w-full"
-              type="text"
-              name="address"
-              v-model="applicationData.companyReference.address"
-            />
-          </div>
-          <div class="w-full">
-            <label for="phone">Phone</label>
-            <input
-              class="w-full"
-              type="text"
-              name="phone"
-              v-model="applicationData.companyReference.phone"
-            />
-          </div>
-          <div class="w-full">
-            <label for="fax">Fax</label>
-            <input
-              class="w-full"
-              type="text"
-              name="fax"
-              v-model="applicationData.companyReference.fax"
-            />
-          </div>
-          <div class="w-full">
-            <label for="email">E-mail</label>
-            <input
-              class="w-full"
-              type="email"
-              name="email"
-              v-model="applicationData.companyReference.email"
-            />
-          </div>
+      <!-- 32 -->
+      <div class="flex flex-col w-full">
+        <div class="flex w-full">
+          <InputText
+            class="w-full"
+            label="*32. Name of inviting company/organisation"
+            v-model="applicationData.invitingCompanyName"
+            uid="invitingCompanyName"
+          />
+          <InputText
+            class="w-full"
+            label="Address of inviting company/organisation"
+            v-model="applicationData.invitingCompanyAddress"
+            uid="invitingCompanyAddress"
+          />
+          <InputText
+            class="w-full"
+            label="Phone of inviting company/organisation"
+            v-model="applicationData.invitingCompanyPhone"
+            uid="invitingCompanyPhone"
+          />
+          <InputText
+            class="w-full"
+            label="Fax of inviting company/organisation"
+            v-model="applicationData.invitingCompanyFax"
+            uid="invitingCompanyFax"
+          />
         </div>
-      </div> -->
+      </div>
+
+      <div class="flex flex-col w-full">
+        <div class="flex w-full">
+          <InputText
+            class="w-full"
+            label="Surname and first name of contact person in company/organisation"
+            v-model="applicationData.companyReferenceFullName"
+            uid="companyReferenceFullName"
+          />
+          <InputText
+            class="w-full"
+            label="Address of contact person in company/organisation"
+            v-model="applicationData.companyReferenceAddress"
+            uid="companyReferenceAddress"
+          />
+        </div>
+
+        <div class="flex w-full">
+          <InputText
+            class="w-full"
+            label="Phone of contact person in company/organisation"
+            v-model="applicationData.companyReferencePhone"
+            uid="companyReferencePhone"
+          />
+          <InputText
+            class="w-full"
+            label="Fax of contact person in company/organisation"
+            v-model="applicationData.companyReferenceFax"
+            uid="companyReferenceFax"
+          />
+          <InputText
+            class="w-full"
+            type-field="email"
+            label="E-mail of contact person in company/organisation"
+            v-model="applicationData.companyReferenceEmail"
+            uid="companyReferenceEmail"
+          />
+        </div>
+      </div>
 
       <!-- 33 -->
-      <!-- <div class="flex flex-col w-full ">
-        <span
-          >*33. Cost of travelling and living during the applicant's stay is
-          covered</span
-        >
-        <div class="flex">
-          <div class="w-full flex flex-col">
-            <div class="mb-4">
-              <input
-                type="checkbox"
-                name="applicant"
-                v-model="applicationData.costsCoverage.applicant"
-              />
-              <label for="applicant">By the applicant himself/herself</label>
-            </div>
-
-            <span>Means of support</span>
-            <div>
-              <input
-                type="checkbox"
-                name="cash"
-                v-model="applicationData.costsCoverage.applicantTypes.cash"
-              />
-              <label for="cash">Cash</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="checks"
-                v-model="applicationData.costsCoverage.applicantTypes.checks"
-              />
-              <label for="checks">Traveller's cheques</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="creditCard"
-                v-model="
-                  applicationData.costsCoverage.applicantTypes.creditCard
-                "
-              />
-              <label for="creditCard">Credit card</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="accomodation"
-                v-model="
-                  applicationData.costsCoverage.applicantTypes
-                    .prepaidAccommodation
-                "
-              />
-              <label for="accomodation">Pre-paid accommodation</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="transport"
-                v-model="
-                  applicationData.costsCoverage.applicantTypes.prepaidTransport
-                "
-              />
-              <label for="transport">Pre-paid transport</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="other"
-                v-model="applicationData.costsCoverage.applicantTypes.other"
-              />
-              <label for="other">Other</label>
-            </div>
-            <div>
-              <label for="otherValue">(please specify)</label>
-              <input
-                class="w-full"
-                type="input"
-                name="otherValue"
-                v-model="
-                  applicationData.costsCoverage.applicantTypes.otherValue
-                "
-              />
-            </div>
-          </div>
-
-          <div class="w-full">
-            <div class="mb-4">
-              <input
-                type="checkbox"
-                name="sponsor"
-                v-model="applicationData.costsCoverage.sponsor"
-              />
-              <label for="sponsor"
-                >by a sponsor (host, company, organisation), please
-                specify</label
-              >
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="referredSponsor"
-                v-model="applicationData.costsCoverage.referredPreviously"
-              />
-              <label for="referredSponsor">referred to in field 31 or 32</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="other"
-                v-model="applicationData.costsCoverage.otherSponsors"
-              />
-              <label for="other">Other</label>
-            </div>
-            <div class="mb-4">
-              <label for="otherSponsorsValue">(please specify)</label>
-              <input
-                class="w-full"
-                type="input"
-                name="otherSponsorsValue"
-                v-model="applicationData.costsCoverage.otherSponsorsValue"
-              />
-            </div>
-
-            <span>Means of support</span>
-            <div>
-              <input
-                type="checkbox"
-                name="cash"
-                v-model="applicationData.costsCoverage.sponsorTypes.cash"
-              />
-              <label for="cash">Cash</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="accommodation"
-                v-model="
-                  applicationData.costsCoverage.sponsorTypes.accommodation
-                "
-              />
-              <label for="accommodation">Accommodation provided</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="allCovered"
-                v-model="applicationData.costsCoverage.sponsorTypes.allCovered"
-              />
-              <label for="allCovered"
-                >All expenses covered during the stay</label
-              >
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="prepaidTransport"
-                v-model="
-                  applicationData.costsCoverage.sponsorTypes.prepaidTransport
-                "
-              />
-              <label for="prepaidTransport">Pre-paid transport</label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name="other"
-                v-model="applicationData.costsCoverage.sponsorTypes.other"
-              />
-              <label for="other">Other</label>
-            </div>
-            <div>
-              <label for="otherValue">(please specify)</label>
-              <input
-                class="w-full"
-                type="input"
-                name="otherValue"
-                v-model="applicationData.costsCoverage.sponsorTypes.otherValue"
-              />
-            </div>
-          </div>
-        </div>
-      </div> -->
+      <div class="flex flex-col w-full">
+        <InputSelect
+          label="*33. Cost of travelling and living during the applicant's stay is covered"
+          v-model="applicationData.costsCoveredBy"
+          uid="costsCoveredBy"
+          name="costsCoveredBy"
+          :options="costsCoverageOptions"
+          @input="resetMeansOfSupportValue()"
+        />
+        <InputCheckbox
+          v-if="applicationData.costsCoveredBy === 'applicant'"
+          class="w-full"
+          label="Applicant means of support"
+          v-model="applicationData.meansOfSupport"
+          :value="applicationData.meansOfSupport"
+          uid="meansOfSupport"
+          name="meansOfSupport"
+          :options="applicantMeansOfSupportOptions"
+        />
+        <InputCheckbox
+          v-if="applicationData.costsCoveredBy === 'sponsor'"
+          class="w-full"
+          label="Sponsor means of support"
+          v-model="applicationData.meansOfSupport"
+          :value="applicationData.meansOfSupport"
+          uid="meansOfSupport"
+          name="meansOfSupport"
+          :options="sponsorMeansOfSupportOptions"
+        />
+        <InputText
+          v-if="applicationData.meansOfSupport.includes('other')"
+          class="w-full"
+          label="Please specify"
+          v-model="applicationData.meansOfSupportOtherValue"
+          uid="meansOfSupportOtherValue"
+        />
+      </div>
 
       <!-- 34 -->
-      <!-- <div class="flex flex-col w-full ">
-        <span
-          >34. Personal data of the family member who is an EU, EEA or CH
-          citizen</span
-        >
-        <div class="flex">
-          <div class="w-full flex flex-col">
-            <label for="surname">Surname</label>
-            <input
-              type="text"
-              name="surname"
-              v-model="applicationData.familyMember.surname"
-            />
-          </div>
-          <div class="w-full flex flex-col">
-            <label for="firstName">First name</label>
-            <input
-              type="text"
-              name="firstName"
-              v-model="applicationData.familyMember.firstName"
-            />
-          </div>
+      <div class="flex flex-col w-full">
+        <div class="flex w-full">
+          <InputText
+            class="w-full"
+            label="34. Personal data of the family member who is an EU, EEA or CH citizen (Full name)"
+            v-model="applicationData.familyMemberFullName"
+            uid="familyMemberFullName"
+          />
+          <InputDate
+            class="w-full"
+            label="Date of birth"
+            v-model="applicationData.familyMemberBirthdate"
+            uid="familyMemberBirthdate"
+          />
         </div>
-        <div class="flex">
-          <div class="w-full flex flex-col">
-            <label for="birthDate">Date of birth</label>
-            <input
-              type="date"
-              name="birthDate"
-              v-model="applicationData.familyMember.dateOfBirth"
-            />
-          </div>
-          <div class="w-full flex flex-col">
-            <label for="nationality">Nationality</label>
-            <input
-              type="text"
-              name="nationality"
-              v-model="applicationData.familyMember.nationality"
-            />
-          </div>
-          <div class="w-full flex flex-col">
-            <label for="documentNumber"
-              >Number of travel document or ID card</label
-            >
-            <input
-              type="text"
-              name="documentNumber"
-              v-model="applicationData.familyMember.documentNumber"
-            />
-          </div>
+        <div class="w-full flex">
+          <InputText
+            class="w-full"
+            label="Nationality"
+            v-model="applicationData.familyMemberNationality"
+            uid="familyMemberNationality"
+          />
+          <InputText
+            class="w-full"
+            label="Number of travel document or ID card"
+            v-model="applicationData.familyMemberDocumentNumber"
+            uid="familyMemberDocumentNumber"
+          />
         </div>
-      </div> -->
+      </div>
 
       <!-- 35 -->
-      <!-- <div class="flex flex-col w-full ">
-        <span>35. Family relationship with an EU, EEA or CH citizen</span>
-        <div class="flex">
-          <div class="w-full">
-            <input
-              type="checkbox"
-              name="spouse"
-              v-model="applicationData.relationshipType.spouse"
-            />
-            <label for="spouse">Spouse</label>
-          </div>
-          <div class="w-full">
-            <input
-              type="checkbox"
-              name="child"
-              v-model="applicationData.relationshipType.grandchild"
-            />
-            <label for="child">Child</label>
-          </div>
-          <div class="w-full">
-            <input
-              type="checkbox"
-              name="grandchild"
-              v-model="applicationData.relationshipType.child"
-            />
-            <label for="grandchild">Grandchild</label>
-          </div>
-          <div class="w-full">
-            <input
-              type="checkbox"
-              name="dependent"
-              v-model="applicationData.relationshipType.dependent"
-            />
-            <label for="dependent">Dependent ascendant</label>
-          </div>
-        </div>
-      </div> -->
+      <div class="w-full">
+        <InputSelect
+          label="35. Family relationship with an EU, EEA or CH citizen"
+          v-model="applicationData.relationshipType"
+          uid="relationshipType"
+          name="relationshipType"
+          :options="relationshipTypeOptions"
+        />
+      </div>
 
       <!-- 36 -->
-      <!-- <div class="flex w-full ">
-        <div class="w-full flex flex-col">
-          <div class="w-full">
-            <label for="place">Place</label>
-            <input
-              class="w-full"
-              type="input"
-              name="place"
-              v-model="applicationData.place"
-            />
-          </div>
-          <div class="w-full">
-            <label for="date">Date</label>
-            <input
-              class="w-full"
-              type="date"
-              name="date"
-              v-model="applicationData.date"
-            />
-          </div>
+      <div class="flex flex-col w-full">
+        <div class="flex w-full">
+          <InputText
+            class="w-full"
+            label="Place"
+            v-model="applicationData.place"
+            uid="place"
+          />
+          <InputDate
+            class="w-full"
+            label="Date"
+            v-model="applicationData.date"
+            uid="date"
+          />
+          <InputText
+            class="w-full"
+            label="37. Signature (for minors, signature of parental authority/legal guardian)"
+            v-model="applicationData.signature"
+            uid="signature  "
+          />
         </div>
-        <div class="w-full">
-          <span>Signature</span>
-        </div>
-      </div> -->
+      </div>
 
       <!-- Acceptance area -->
-      <!-- <div class="flex flex-col w-full space-y-4 ">
-        <div class="w-full flex-col">
-          <input type="checkbox" v-model="applicationData.visaFeeAcceptance" />
+      <div class="flex flex-col w-full space-y-4">
+        <div class="w-full flex space-x-4 items-center">
+          <input
+            type="checkbox"
+            id="visaFeeAcceptance"
+            name="visaFeeAcceptance"
+            v-model="applicationData.visaFeeAcceptance"
+          />
           <span
             >I am aware that the visa fee is not refunded if the visa is
             refused.</span
           >
         </div>
 
-        <div class="w-full flex-col">
-          <input type="checkbox" v-model="applicationData.insuranceAccepance" />
+        <div class="w-full flex space-x-4 items-center">
+          <input
+            type="checkbox"
+            id="insuranceAccepance"
+            name="insuranceAccepance"
+            v-model="applicationData.insuranceAccepance"
+          />
           <span
             >Applicable in case a multiple-entry visa is applied for (cf. field
             no 24): I am aware of the need to have an adequate travel medical
@@ -1001,9 +698,11 @@ address of educational establishment."
           >
         </div>
 
-        <div class="w-full flex-col">
+        <div class="w-full flex space-x-4 items-center">
           <input
             type="checkbox"
+            id="personalDataProcessingAcceptance"
+            name="personalDataProcessingAcceptance"
             v-model="applicationData.personalDataProcessingAcceptance"
           />
           <span
@@ -1055,8 +754,13 @@ address of educational establishment."
           >
         </div>
 
-        <div class="w-full flex-col">
-          <input type="checkbox" v-model="applicationData.finalAcceptance" />
+        <div class="w-full flex space-x-4 items-center">
+          <input
+            type="checkbox"
+            id="finalAcceptance"
+            name="finalAcceptance"
+            v-model="applicationData.finalAcceptance"
+          />
           <span
             >I declare that to the best of my knowledge all particulars supplied
             by me are correct and complete. I am aware that any false statements
@@ -1074,36 +778,31 @@ address of educational establishment."
             States.</span
           >
         </div>
-      </div> -->
+      </div>
 
-      <!-- <div class="flex w-full ">
-        <div class="w-full flex flex-col">
-          <div class="w-full">
-            <label for="place">Place</label>
-            <input
-              class="w-full"
-              type="input"
-              name="place"
-              v-model="applicationData.place"
-            />
-          </div>
-          <div class="w-full">
-            <label for="date">Date</label>
-            <input
-              class="w-full"
-              type="date"
-              name="date"
-              v-model="applicationData.date"
-            />
-          </div>
+      <div class="flex flex-col w-full">
+        <div class="flex w-full">
+          <InputText
+            class="w-full"
+            label="Place"
+            v-model="applicationData.place"
+            uid="place"
+          />
+          <InputDate
+            class="w-full"
+            label="Date"
+            v-model="applicationData.date"
+            uid="date"
+          />
+          <InputText
+            class="w-full"
+            label="Signature (for minors, signature of parental authority/legal
+            guardian):"
+            v-model="applicationData.signature"
+            uid="signature  "
+          />
         </div>
-        <div class="w-full">
-          <span
-            >Signature (for minors, signature of parental authority/legal
-            guardian):</span
-          >
-        </div>
-      </div> -->
+      </div>
 
       <div class="flex">
         <div
@@ -1129,10 +828,11 @@ import html2pdf from "html2pdf.js";
 import InputText from "@/components/InputText.vue";
 import InputDate from "@/components/InputDate.vue";
 import InputSelect from "@/components/InputSelect.vue";
+import InputCheckbox from "@/components/InputCheckbox.vue";
 
 export default {
   name: "MainView",
-  components: { InputText, InputDate, InputSelect },
+  components: { InputText, InputDate, InputSelect, InputCheckbox },
   data() {
     return {
       applicationData: {
@@ -1174,91 +874,47 @@ export default {
         memberDestinationState: "",
         memberStateFirstEntry: "",
         entriesRequested: "",
-        duration: 0, // type number
+        duration: "", // type number
 
         // Page 2
 
-        previousVisas: {
-          no: false,
-          yes: false,
-          issuedOn: "", // type date
-          espiresOn: "", // type date
-        },
-        fingerprintsCollected: {
-          no: false,
-          yes: false,
-          collectedOn: "", // type date *optional if known
-        },
-        finalCountryEntry: {
-          issuedBy: "",
-          issuedOn: "", // type date
-          expiresOn: "", // type date
-        },
+        previousVisas: "no",
+        previousVisasIssuedOn: null,
+        previousVisasExpiresOn: null,
+        fingerprintsCollected: "no",
+        fingerprintsCollectionDate: null,
+        finalCountryEntryPermitIssuedBy: "",
+        finalCountryEntryPermitIssuedOn: "",
+        finalCountryEntryPermitExpiresOn: "",
         dateOfArrival: "", // type date
         dateOfDeparture: "", // type date
 
-        // --- Relies on the tripPurpose 'visit'
-        invitingPerson: {
-          firstName: "",
-          surname: "",
-          address: "",
-          email: "", // type email
-        },
-        accomodation: {
-          address: "",
-          email: "",
-        },
-        invitingCompany: {
-          name: "",
-          address: "",
-          phone: "",
-          fax: "",
-        },
-        companyReference: {
-          firstName: "",
-          surname: "",
-          address: "",
-          phone: "",
-          fax: "",
-          email: "",
-        },
-        costsCoverage: {
-          applicant: false,
-          applicantTypes: {
-            cash: false,
-            check: false,
-            creditCard: false,
-            prepaidAccommodation: false,
-            prepaidTransport: false,
-            other: false,
-            otherValue: "",
-          },
-          sponsor: false,
-          referredPreviously: false,
-          otherSponsors: false,
-          otherSponsorsValue: "",
-          sponsorTypes: {
-            cash: false,
-            accomodation: false,
-            allCovered: false,
-            prepaidTransport: false,
-            other: false,
-            otherValue: "",
-          },
-        },
-        familyMember: {
-          surname: "",
-          firstName: "",
-          dateOfBirth: "", // type date
-          nationality: "",
-          documentNumber: "",
-        },
-        relationshipType: {
-          spouse: false,
-          child: false,
-          grandchild: false,
-          dependent: false,
-        },
+        invitingPersonFullNameOrTemporaryAccomodation: "",
+        invitingPersonOrTemporaryAccomodationAddress: "",
+        invitingPersonOrTemporaryAccomodationEmail: "",
+
+        invitingCompanyName: "",
+        invitingCompanyAddress: "",
+        invitingCompanyPhone: "",
+        invitingCompanyFax: "",
+
+        companyReferenceFullName: "",
+        companyReferenceAddress: "",
+        companyReferencePhone: "",
+        companyReferenceFax: "",
+        companyReferenceEmail: "",
+
+        costsCoveredBy: "applicant",
+        meansOfSupport: [],
+        meansOfSupportOtherValue: "",
+
+        familyMemberFullName: "",
+        familyMemberBirthdate: "",
+        familyMemberNationality: "",
+        familyMemberDocumentNumber: "",
+
+        relationshipType: "",
+        signature: "",
         place: "", // *shared info in two sections
         date: "", // type date *shared info in two sections
         visaFeeAcceptance: false, // mandatory
@@ -1266,6 +922,7 @@ export default {
         personalDataProcessingAcceptance: false, // mandatory
         finalAcceptance: false, // mandatory
       },
+
       sexOptions: [
         { name: "Male", value: "male" },
         { name: "Female", value: "female" },
@@ -1308,6 +965,35 @@ export default {
         { name: "Double", value: "double" },
         { name: "Multiple", value: "multiple" },
       ],
+      costsCoverageOptions: [
+        { name: "By the applicant himself/herself", value: "applicant" },
+        {
+          name: "By a sponsor (host, company, organisation)",
+          value: "sponsor",
+        },
+      ],
+      applicantMeansOfSupportOptions: [
+        { name: "Cash", value: "cash" },
+        { name: "Check", value: "check" },
+        { name: "Credit Card", value: "creditCard" },
+        { name: "Prepaid Accomodation", value: "prepaidAccomodation" },
+        { name: "Prepaid Transport", value: "prepaidTransport" },
+        { name: "Other", value: "other" },
+      ],
+      sponsorMeansOfSupportOptions: [
+        { name: "Cash", value: "cash" },
+        { name: "Accomodation", value: "accomodation" },
+        { name: "All covered", value: "allCovered" },
+        { name: "Prepaid Transport", value: "prepaidTransport" },
+        { name: "Other", value: "other" },
+      ],
+      relationshipTypeOptions: [
+        { name: "Select option", value: "" },
+        { name: "Spouse", value: "spouse" },
+        { name: "Child", value: "child" },
+        { name: "Grandchild", value: "grandchild" },
+        { name: "Dependent ascendant", value: "dependentAscendant" },
+      ],
     };
   },
   mounted() {
@@ -1327,7 +1013,6 @@ export default {
       }
       return result;
     },
-
     isTravelDocumentTypeUnspecified() {
       let result = false;
       if (
@@ -1354,7 +1039,99 @@ export default {
       html2pdf().from(element).set(options).save();
     },
     onReset() {
-      console.log("reset requested");
+      this.applicationData = Object.assign(
+        {},
+        {
+          surname: "",
+          surnameAtBirth: "",
+          firstName: "",
+          dateOfBirth: "", // type date
+          placeOfBirth: "",
+          countryOfBirth: "",
+          currentNationality: "",
+          nationalityAtBirth: "", // optional
+          sex: "male",
+          martialStatus: "single",
+          martialStatusOtherValue: "",
+          minorsData: "",
+          nationalIdentityNumber: "",
+          travelDocumentType: "ordinary",
+          travelDocumentTypeOtherValue: "",
+          travelDocumentNumber: "",
+          travelDocumentIssuedDate: "", // type date
+          travelDocumentExpirationDate: "", // type date
+          travelDocumentIssuedBy: "",
+          address: "",
+          email: "", // type email
+          phone: "",
+          otherResidence: "no",
+          otherResidenceDocumentName: "",
+          otherResidenceDocumentNumber: "",
+          otherResidenceExpirationDate: "",
+          isStudent: "no", // pivoting variable
+          currentOccupation: "",
+          employerFullName: "",
+          employerAddress: "",
+          employerPhone: "",
+          educatinoalEstablishmentName: "",
+          educatinoalEstablishmentAddress: "",
+          travelPurpose: "tourism",
+          travelPurposeOtherValue: "",
+          memberDestinationState: "",
+          memberStateFirstEntry: "",
+          entriesRequested: "single",
+          duration: "", // type number
+
+          // Page 2
+
+          previousVisas: "no",
+          previousVisasIssuedOn: null,
+          previousVisasExpiresOn: null,
+          fingerprintsCollected: "no",
+          fingerprintsCollectionDate: null,
+          finalCountryEntryPermitIssuedBy: "",
+          finalCountryEntryPermitIssuedOn: "",
+          finalCountryEntryPermitExpiresOn: "",
+          dateOfArrival: "", // type date
+          dateOfDeparture: "", // type date
+
+          invitingPersonFullNameOrTemporaryAccomodation: "",
+          invitingPersonOrTemporaryAccomodationAddress: "",
+          invitingPersonOrTemporaryAccomodationEmail: "",
+
+          invitingCompanyName: "",
+          invitingCompanyAddress: "",
+          invitingCompanyPhone: "",
+          invitingCompanyFax: "",
+
+          companyReferenceFullName: "",
+          companyReferenceAddress: "",
+          companyReferencePhone: "",
+          companyReferenceFax: "",
+          companyReferenceEmail: "",
+
+          costsCoveredBy: "applicant",
+          meansOfSupport: [],
+          meansOfSupportOtherValue: "",
+
+          familyMemberFullName: "",
+          familyMemberBirthdate: "",
+          familyMemberNationality: "",
+          familyMemberDocumentNumber: "",
+
+          relationshipType: "spouse",
+          signature: "",
+          place: "", // *shared info in two sections
+          date: "", // type date *shared info in two sections
+          visaFeeAcceptance: false, // mandatory
+          insuranceAccepance: false, // mandatory
+          personalDataProcessingAcceptance: false, // mandatory
+          finalAcceptance: false, // mandatory
+        }
+      );
+    },
+    resetMeansOfSupportValue() {
+      this.applicationData.meansOfSupport = [];
     },
     // async loadTemplate() {
     //   try {
