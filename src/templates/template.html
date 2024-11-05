@@ -1,88 +1,97 @@
-<template>
-  <div id="target" ref="target">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PDF Template</title>
+</head>
+
+<body class="bg-blue-200 font-serif">
     <div class="flex h-full flex-1 flex-col space-y-8 p-8">
-      <div class="text-2xl">Application for Schengen Visa</div>
-      <!-- flag image -->
-      <div class="flex">
-        <div class="flex-1">
-          <img
-            class="h-24"
-            src="data:image/png;base64,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"
-            alt="eu-flag"
-          />
-        </div>
-        <div class="h-28 border border-gray-700 p-8 flex items-center">
-          Image loading seciton
-        </div>
-      </div>
+        <!-- flag image -->
+        <div class="flex items-center">
+            <div class="flex-1 space-y-4">
+                <span class="text-xl">Application for Schengen Visa</span>
+                <div class="flex-1">
+                    <img class="h-20"
+                        src="data:image/png;base64,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"
+                        alt="eu-flag" />
+                </div>
+            </div>
 
-      <!-- Has to be hidden on print -->
-      <div
-        class="flex flex-col text-xs space-y-2 border-l border-gray-600 pl-2"
-      >
-        <span>&#9888; Important</span>
-        <span>
-          The fields marked with * shall not be filled in by family members of
-          EU, EEA or CH citizens (spouse, child or dependent ascendant) while
-          exercising their right to free movement. Family members of EU, EEA or
-          CH citizens shall present documents to prove this relationship and
-          fill in fields no 34 and 35. (x) Fields 1-3 shall be filled in in
-          accordance with the data in the travel document.
-        </span>
-      </div>
-
-      <!-- 1,2,3 -->
-      <InputText
-        label="1. Surname (family name) (x)"
-        v-model="applicationData.surname"
-        uid="lastName"
-      />
-      <InputText
-        label="2. Surname at birth (Former family name(s)) (x)"
-        v-model="applicationData.surnameAtBirth"
-        uid="surnameAtBirth"
-      />
-      <InputText
-        label="3. First name(s) (Given name(s)) (x)"
-        v-model="applicationData.firstName"
-        uid="firstName"
-      />
-
-      <!-- 4,5,6,7 -->
-      <div class="flex w-full">
-        <InputDate
-          label="4. Date of birth (day-month-year)"
-          v-model="applicationData.dateOfBirth"
-          uid="dateOfBirth"
-        />
-        <div class="flex flex-col w-full">
-          <InputText
-            label="5. Place of birth"
-            v-model="applicationData.placeOfBirth"
-            uid="placeOfBirth"
-          />
-          <InputText
-            label="6. Country of birth"
-            v-model="applicationData.countryOfBirth"
-            uid="countryOfBirth"
-          />
+            <div class="h-28 border border-gray-700 p-8 flex items-center">
+                Photo section
+            </div>
         </div>
-        <div class="flex flex-col w-full">
-          <InputText
-            label="7. Current nationality"
-            v-model="applicationData.currentNationality"
-            uid="currentNationality"
-          />
-          <InputText
-            label="Nationality at birth (if different)"
-            v-model="applicationData.nationalityAtBirth"
-            uid="nationalityAtBirth"
-          />
-        </div>
-      </div>
 
-      <!-- 8,9 -->
-      <div class="flex w-full">
+        <div class="flex bg-red-100 text-sm">
+            <div class="flex-1 border border-black">
+                <!-- 1,2,3 -->
+                <div class="flex flex-col border-b border-b-black">
+                    <span class="mb-1">1. Surname (family name) (x)</span>
+                    <span class="font-semibold p-2">{{ surname }}</span>
+                </div>
+                <div class="flex flex-col border-b border-b-black">
+                    <span class="mb-1">2. Surname at birth (Former family name(s)) (x)</span>
+                    <span class="font-semibold p-2">{{ surnameAtBirth }}</span>
+                </div>
+                <div class="flex flex-col border-b border-b-black">
+                    <span class="mb-1">3. First name(s) (Given name(s)) (x)</span>
+                    <span class="font-semibold p-2">{{ firstName }}</span>
+                </div>
+
+                <!-- 4,5,6,7 -->
+                <div class="flex ">
+                    <div class="flex flex-col w-full border-b border-b-black border-r border-r-black">
+                        <span class="mb-1">4. Date of birth (day-month-year)</span>
+                        <span class="font-semibold p-2">{{ dateOfBirth }}</span>
+                    </div>
+
+                    <div class="flex flex-col w-full border-b border-b-black border-r border-r-black">
+                        <div class="flex flex-col">
+                            <span class="mb-1">5. Place of birth</span>
+                            <span class="font-semibold p-2">{{ placeOfBirth }}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="mb-1">6. Country of birth</span>
+                            <span class="font-semibold p-2">{{ countryOfBirth }}</span>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col w-full border-b border-b-black">
+                        <div class="flex flex-col">
+                            <span class="mb-1">7. Current nationality</span>
+                            <span class="font-semibold p-2">{{ currentNationality }}</span>
+                        </div>
+                        <div class="flex flex-col">
+                            <span class="mb-1">Nationality at birth (if different)</span>
+                            <span class="font-semibold p-2">{{ nationalityAtBirth }}</span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- <div class="flex w-full">
+                    <InputDate label="4. Date of birth (day-month-year)" v-model="applicationData.dateOfBirth"
+                        uid="dateOfBirth" />
+                    <div class="flex flex-col w-full">
+                        <InputText label="5. Place of birth" v-model="applicationData.placeOfBirth"
+                            uid="placeOfBirth" />
+                        <InputText label="6. Country of birth" v-model="applicationData.countryOfBirth"
+                            uid="countryOfBirth" />
+                    </div>
+                    <div class="flex flex-col w-full">
+                        <InputText label="7. Current nationality" v-model="applicationData.currentNationality"
+                            uid="currentNationality" />
+                        <InputText label="Nationality at birth (if different)"
+                            v-model="applicationData.nationalityAtBirth" uid="nationalityAtBirth" />
+                    </div>
+                </div> -->
+
+                <!-- 8,9 -->
+                <!-- <div class="flex w-full">
         <div class="flex flex-col w-full">
           <InputSelect
             label="8. Sex"
@@ -108,14 +117,14 @@
             uid="martialStatusOtherValue"
           />
         </div>
-      </div>
+      </div> -->
 
-      <!-- 10,11 -->
-      <div class="flex flex-col">
+                <!-- 10,11 -->
+                <!-- <div class="flex flex-col">
         <InputText
           label="10. In the case of minors: Surname, first name, address (if different
-          from applicant's) and nationality of parental authority/legal
-          guardian"
+              from applicant's) and nationality of parental authority/legal
+              guardian"
           v-model="applicationData.minorsData"
           uid="minorsData"
         />
@@ -126,10 +135,10 @@
           v-model="applicationData.nationalIdentityNumber"
           uid="nationalIdentityNumber"
         />
-      </div>
+      </div> -->
 
-      <!-- 12 -->
-      <div class="flex flex-col w-full">
+                <!-- 12 -->
+                <!-- <div class="flex flex-col w-full">
         <InputSelect
           label="12. Type of travel document"
           v-model="applicationData.travelDocumentType"
@@ -143,10 +152,10 @@
           v-model="applicationData.travelDocumentTypeOtherValue"
           uid="travelDocumentTypeOtherValue"
         />
-      </div>
+      </div> -->
 
-      <!-- 13,14,15,16 -->
-      <div class="flex w-full">
+                <!-- 13,14,15,16 -->
+                <!-- <div class="flex w-full">
         <div class="flex flex-col w-full">
           <InputText
             label="13. Number of travel document"
@@ -175,10 +184,10 @@
             uid="travelDocumentIssuedBy"
           />
         </div>
-      </div>
+      </div> -->
 
-      <!-- 17 -->
-      <div class="flex w-full">
+                <!-- 17 -->
+                <!-- <div class="flex w-full">
         <div class="flex flex-col w-full">
           <InputText
             label="17. Applicant's home address"
@@ -201,13 +210,13 @@
             uid="phone"
           />
         </div>
-      </div>
+      </div> -->
 
-      <!-- 18 -->
-      <div class="flex w-full">
+                <!-- 18 -->
+                <!-- <div class="flex w-full">
         <InputSelect
           label="18. Residence in a country other than the country of current
-          nationality"
+              nationality"
           v-model="applicationData.otherResidence"
           uid="otherResidence"
           name="otherResidence"
@@ -233,20 +242,20 @@
             uid="otherResidenceExpirationDate"
           />
         </div>
-      </div>
+      </div> -->
 
-      <!-- 19, 20 -->
-      <div class="flex flex-col w-full">
-        <InputSelect
+                <!-- 19, 20 -->
+                <!-- <div class="flex flex-col w-full"> -->
+                <!-- <InputSelect
           label="* 19-20. Current occupation (student or not). Employer and employer's address and telephone number. For students, name and
-address of educational establishment."
+    address of educational establishment."
           v-model="applicationData.isStudent"
           uid="isStudent"
           name="isStudent"
           :options="yesNoOptions"
-        />
-        <!-- IF STUDENT -->
-        <div class="flex w-full" v-if="applicationData.isStudent == 'yes'">
+        /> -->
+                <!-- IF STUDENT -->
+                <!-- <div class="flex w-full" v-if="applicationData.isStudent == 'yes'">
           <div class="flex flex-col w-full">
             <InputText
               label="Current occupation"
@@ -268,10 +277,10 @@ address of educational establishment."
               uid="educatinoalEstablishmentAddress"
             />
           </div>
-        </div>
+        </div> -->
 
-        <!-- IF NOT STUDENT -->
-        <div class="flex w-full" v-else>
+                <!-- IF NOT STUDENT -->
+                <!-- <div class="flex w-full" v-else>
           <div class="flex flex-col w-full">
             <InputText
               label="Current occupation"
@@ -300,11 +309,11 @@ address of educational establishment."
               uid="employerPhone"
             />
           </div>
-        </div>
-      </div>
+        </div> -->
+                <!-- </div> -->
 
-      <!-- 21 -->
-      <div class="flex flex-col w-full">
+                <!-- 21 -->
+                <!-- <div class="flex flex-col w-full">
         <InputSelect
           label="21. Main purpose(s) of the journey"
           v-model="applicationData.travelPurpose"
@@ -318,10 +327,10 @@ address of educational establishment."
           v-model="applicationData.travelPurposeOtherValue"
           uid="travelPurposeOtherValue"
         />
-      </div>
+      </div> -->
 
-      <!-- 22,23 -->
-      <div class="flex w-full">
+                <!-- 22,23 -->
+                <!-- <div class="flex w-full">
         <div class="flex flex-col w-full">
           <InputText
             label="22. Member State(s) of destination"
@@ -336,10 +345,10 @@ address of educational establishment."
             uid="memberStateFirstEntry"
           />
         </div>
-      </div>
+      </div> -->
 
-      <!-- 24,25 -->
-      <div class="flex w-full">
+                <!-- 24,25 -->
+                <!-- <div class="flex w-full">
         <div class="flex flex-col w-full">
           <InputSelect
             label="24. Number of entries requested"
@@ -357,12 +366,12 @@ address of educational establishment."
             type-field="number"
           />
         </div>
-      </div>
+      </div> -->
 
-      <!-- PAGE 2 -->
+                <!-- PAGE 2 -->
 
-      <!-- 26 -->
-      <div class="flex flex-col w-full">
+                <!-- 26 -->
+                <!-- <div class="flex flex-col w-full">
         <div class="w-full">
           <InputSelect
             label="26. Schengen visas issued during the past three years"
@@ -389,14 +398,14 @@ address of educational establishment."
             />
           </div>
         </div>
-      </div>
+      </div> -->
 
-      <!-- 27 -->
-      <div class="flex flex-col w-full">
+                <!-- 27 -->
+                <!-- <div class="flex flex-col w-full">
         <div class="w-full">
           <InputSelect
             label="27.Fingerprints collected previously for the purpose of applying
-            for a Schengen visa"
+                for a Schengen visa"
             v-model="applicationData.fingerprintsCollected"
             uid="fingerprintsCollected"
             name="fingerprintsCollected"
@@ -414,10 +423,10 @@ address of educational establishment."
             uid="fingerprintsCollectionDate"
           />
         </div>
-      </div>
+      </div> -->
 
-      <!-- 28 -->
-      <div class="flex">
+                <!-- 28 -->
+                <!-- <div class="flex">
         <div class="w-full">
           <InputText
             label="28. Entry permit for the final country of destination issued by (where applicable)"
@@ -439,10 +448,10 @@ address of educational establishment."
             uid="finalCountryEntryPermitExpiresOn"
           />
         </div>
-      </div>
+      </div> -->
 
-      <!-- 29,30 -->
-      <div class="flex w-full">
+                <!-- 29,30 -->
+                <!-- <div class="flex w-full">
         <div class="w-full">
           <InputDate
             label="29. Intended date of arrival in the Schengen area"
@@ -458,17 +467,17 @@ address of educational establishment."
             uid="dateOfDeparture"
           />
         </div>
-      </div>
+      </div> -->
 
-      <!-- 31 -->
-      <div class="flex flex-col w-full">
+                <!-- 31 -->
+                <!-- <div class="flex flex-col w-full">
         <div class="w-full">
           <InputText
             label="31. Surname and first name of the inviting person(s) in the Member
-          State(s)"
+              State(s)"
             v-model="
-              applicationData.invitingPersonFullNameOrTemporaryAccomodation
-            "
+                  applicationData.invitingPersonFullNameOrTemporaryAccomodation
+                "
             uid="invitingPersonFullNameOrTemporaryAccomodation"
           />
         </div>
@@ -477,8 +486,8 @@ address of educational establishment."
             class="w-full"
             label="Address of inviting person(s)/hotel(s)/temporary accommodation(s)"
             v-model="
-              applicationData.invitingPersonOrTemporaryAccomodationAddress
-            "
+                  applicationData.invitingPersonOrTemporaryAccomodationAddress
+                "
             uid="invitingPersonOrTemporaryAccomodationAddress"
           />
           <InputText
@@ -489,12 +498,12 @@ address of educational establishment."
             uid="invitingPersonOrTemporaryAccomodationEmail"
           />
         </div>
-      </div>
+      </div> -->
 
-      <!-- Company reference -->
+                <!-- Company reference -->
 
-      <!-- 32 -->
-      <div class="flex flex-col w-full">
+                <!-- 32 -->
+                <!-- <div class="flex flex-col w-full">
         <div class="flex w-full">
           <InputText
             class="w-full"
@@ -521,9 +530,9 @@ address of educational establishment."
             uid="invitingCompanyFax"
           />
         </div>
-      </div>
+      </div> -->
 
-      <div class="flex flex-col w-full">
+                <!-- <div class="flex flex-col w-full">
         <div class="flex w-full">
           <InputText
             class="w-full"
@@ -560,10 +569,10 @@ address of educational establishment."
             uid="companyReferenceEmail"
           />
         </div>
-      </div>
+      </div> -->
 
-      <!-- 33 -->
-      <div class="flex flex-col w-full">
+                <!-- 33 -->
+                <!-- <div class="flex flex-col w-full">
         <InputSelect
           label="*33. Cost of travelling and living during the applicant's stay is covered"
           v-model="applicationData.costsCoveredBy"
@@ -599,10 +608,10 @@ address of educational establishment."
           v-model="applicationData.meansOfSupportOtherValue"
           uid="meansOfSupportOtherValue"
         />
-      </div>
+      </div> -->
 
-      <!-- 34 -->
-      <div class="flex flex-col w-full">
+                <!-- 34 -->
+                <!-- <div class="flex flex-col w-full">
         <div class="flex w-full">
           <InputText
             class="w-full"
@@ -631,10 +640,10 @@ address of educational establishment."
             uid="familyMemberDocumentNumber"
           />
         </div>
-      </div>
+      </div> -->
 
-      <!-- 35 -->
-      <div class="w-full">
+                <!-- 35 -->
+                <!-- <div class="w-full">
         <InputSelect
           label="35. Family relationship with an EU, EEA or CH citizen"
           v-model="applicationData.relationshipType"
@@ -642,10 +651,10 @@ address of educational establishment."
           name="relationshipType"
           :options="relationshipTypeOptions"
         />
-      </div>
+      </div> -->
 
-      <!-- 36 -->
-      <div class="flex flex-col w-full">
+                <!-- 36 -->
+                <!-- <div class="flex flex-col w-full">
         <div class="flex w-full">
           <InputText
             class="w-full"
@@ -666,10 +675,10 @@ address of educational establishment."
             uid="signature  "
           />
         </div>
-      </div>
+      </div> -->
 
-      <!-- Acceptance area -->
-      <div class="flex flex-col w-full space-y-4">
+                <!-- Acceptance area -->
+                <!-- <div class="flex flex-col w-full space-y-4">
         <div class="w-full flex space-x-4 items-center">
           <input
             type="checkbox"
@@ -778,9 +787,9 @@ address of educational establishment."
             States.</span
           >
         </div>
-      </div>
+      </div> -->
 
-      <div class="flex flex-col w-full">
+                <!-- <div class="flex flex-col w-full">
         <div class="flex w-full">
           <InputText
             class="w-full"
@@ -797,354 +806,19 @@ address of educational establishment."
           <InputText
             class="w-full"
             label="Signature (for minors, signature of parental authority/legal
-            guardian):"
+                guardian):"
             v-model="applicationData.signature"
             uid="signature  "
           />
         </div>
-      </div>
+      </div> -->
+            </div>
 
-      <div class="flex">
-        <div
-          @click="onPrint"
-          class="p-2 bg-red-200 flex flex-1 justify-center cursor-pointer hover:bg-red-300"
-        >
-          <span>Print</span>
+            <div class="border border-black px-2 text-xs">
+                <span class="uppercase">for official use only</span>
+            </div>
         </div>
-        <div
-          @click="onReset"
-          class="p-2 bg-yellow-200 flex flex-1 justify-center cursor-pointer hover:bg-yellow-300"
-        >
-          <span>Reset</span>
-        </div>
-      </div>
     </div>
-  </div>
-</template>
+</body>
 
-<script>
-import html2pdf from "html2pdf.js";
-// import printTemplate from "../templates/template.js";
-import InputText from "@/components/InputText.vue";
-import InputDate from "@/components/InputDate.vue";
-import InputSelect from "@/components/InputSelect.vue";
-import InputCheckbox from "@/components/InputCheckbox.vue";
-
-export default {
-  name: "MainView",
-  components: { InputText, InputDate, InputSelect, InputCheckbox },
-  data() {
-    return {
-      applicationData: {
-        surname: "",
-        surnameAtBirth: "",
-        firstName: "",
-        dateOfBirth: "", // type date
-        placeOfBirth: "",
-        countryOfBirth: "",
-        currentNationality: "",
-        nationalityAtBirth: "", // optional
-        sex: "male",
-        martialStatus: "single",
-        martialStatusOtherValue: "",
-        minorsData: "",
-        nationalIdentityNumber: "",
-        travelDocumentType: "ordinary",
-        travelDocumentTypeOtherValue: "",
-        travelDocumentNumber: "",
-        travelDocumentIssuedDate: "", // type date
-        travelDocumentExpirationDate: "", // type date
-        travelDocumentIssuedBy: "",
-        address: "",
-        email: "", // type email
-        phone: "",
-        otherResidence: "no",
-        otherResidenceDocumentName: "",
-        otherResidenceDocumentNumber: "",
-        otherResidenceExpirationDate: "",
-        isStudent: "no", // pivoting variable
-        currentOccupation: "",
-        employerFullName: "",
-        employerAddress: "",
-        employerPhone: "",
-        educatinoalEstablishmentName: "",
-        educatinoalEstablishmentAddress: "",
-        travelPurpose: "tourism",
-        travelPurposeOtherValue: "",
-        memberDestinationState: "",
-        memberStateFirstEntry: "",
-        entriesRequested: "single",
-        duration: "", // type number
-
-        // Page 2
-
-        previousVisas: "no",
-        previousVisasIssuedOn: null,
-        previousVisasExpiresOn: null,
-        fingerprintsCollected: "no",
-        fingerprintsCollectionDate: null,
-        finalCountryEntryPermitIssuedBy: "",
-        finalCountryEntryPermitIssuedOn: "",
-        finalCountryEntryPermitExpiresOn: "",
-        dateOfArrival: "", // type date
-        dateOfDeparture: "", // type date
-
-        invitingPersonFullNameOrTemporaryAccomodation: "",
-        invitingPersonOrTemporaryAccomodationAddress: "",
-        invitingPersonOrTemporaryAccomodationEmail: "",
-
-        invitingCompanyName: "",
-        invitingCompanyAddress: "",
-        invitingCompanyPhone: "",
-        invitingCompanyFax: "",
-
-        companyReferenceFullName: "",
-        companyReferenceAddress: "",
-        companyReferencePhone: "",
-        companyReferenceFax: "",
-        companyReferenceEmail: "",
-
-        costsCoveredBy: "applicant",
-        meansOfSupport: [],
-        meansOfSupportOtherValue: "",
-
-        familyMemberFullName: "",
-        familyMemberBirthdate: "",
-        familyMemberNationality: "",
-        familyMemberDocumentNumber: "",
-
-        relationshipType: "",
-        signature: "",
-        place: "", // *shared info in two sections
-        date: "", // type date *shared info in two sections
-        visaFeeAcceptance: false, // mandatory
-        insuranceAccepance: false, // mandatory
-        personalDataProcessingAcceptance: false, // mandatory
-        finalAcceptance: false, // mandatory
-      },
-
-      sexOptions: [
-        { name: "Male", value: "male" },
-        { name: "Female", value: "female" },
-      ],
-      martialStatusOptions: [
-        { name: "Single", value: "single" },
-        { name: "Married", value: "married" },
-        { name: "Separated", value: "separated" },
-        { name: "Divorced", value: "divorced" },
-        { name: "Widow(ed)", value: "widow(ed)" },
-        { name: "Other", value: "other" },
-      ],
-      travelDocumentTypeOptions: [
-        { name: "Ordinaty", value: "ordinary" },
-        { name: "Diplomatic", value: "diplomatic" },
-        { name: "Service", value: "service" },
-        { name: "Official", value: "official" },
-        { name: "Special", value: "special" },
-        { name: "Other", value: "other" },
-      ],
-      yesNoOptions: [
-        { name: "Yes", value: "yes" },
-        { name: "No", value: "no" },
-      ],
-      travelPurposeOptions: [
-        { name: "Tourism", value: "tourism" },
-        { name: "Business", value: "business" },
-        { name: "Visit", value: "visit" },
-        { name: "Cultural", value: "cultural" },
-        { name: "Sports", value: "sports" },
-        { name: "Official", value: "official" },
-        { name: "Medical", value: "medical" },
-        { name: "Study", value: "study" },
-        { name: "Transit", value: "transit" },
-        { name: "Airport transit", value: "airportTransit" },
-        { name: "Other", value: "other" },
-      ],
-      entriesOptions: [
-        { name: "Single", value: "single" },
-        { name: "Double", value: "double" },
-        { name: "Multiple", value: "multiple" },
-      ],
-      costsCoverageOptions: [
-        { name: "By the applicant himself/herself", value: "applicant" },
-        {
-          name: "By a sponsor (host, company, organisation)",
-          value: "sponsor",
-        },
-      ],
-      applicantMeansOfSupportOptions: [
-        { name: "Cash", value: "cash" },
-        { name: "Check", value: "check" },
-        { name: "Credit Card", value: "creditCard" },
-        { name: "Prepaid Accomodation", value: "prepaidAccomodation" },
-        { name: "Prepaid Transport", value: "prepaidTransport" },
-        { name: "Other", value: "other" },
-      ],
-      sponsorMeansOfSupportOptions: [
-        { name: "Cash", value: "cash" },
-        { name: "Accomodation", value: "accomodation" },
-        { name: "All covered", value: "allCovered" },
-        { name: "Prepaid Transport", value: "prepaidTransport" },
-        { name: "Other", value: "other" },
-      ],
-      relationshipTypeOptions: [
-        { name: "Select option", value: "" },
-        { name: "Spouse", value: "spouse" },
-        { name: "Child", value: "child" },
-        { name: "Grandchild", value: "grandchild" },
-        { name: "Dependent ascendant", value: "dependentAscendant" },
-      ],
-    };
-  },
-  mounted() {
-    // console.log("mounted");
-    // console.log(printTemplate);
-    // console.log(printTemplate.replace("{{ title }}", "MISHA"));
-    // this.loadTemplate();
-  },
-  computed: {
-    isMartialStatusUnspecified() {
-      let result = false;
-      if (
-        this.applicationData.martialStatus != "" &&
-        this.applicationData.martialStatus === "other"
-      ) {
-        result = true;
-      }
-      return result;
-    },
-    isTravelDocumentTypeUnspecified() {
-      let result = false;
-      if (
-        this.applicationData.travelDocumentType != "" &&
-        this.applicationData.travelDocumentType === "other"
-      ) {
-        result = true;
-      }
-      return result;
-    },
-  },
-
-  methods: {
-    onPrint() {
-      console.log("print requested");
-      const element = this.$refs.target;
-      const options = {
-        margin: 1,
-        filename: `${this.applicationData.firstName}-${this.applicationData.lastName}-application`,
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: "in", format: "letter", orientation: "portrait" },
-      };
-      html2pdf().from(element).set(options).save();
-    },
-    onReset() {
-      this.applicationData = Object.assign(
-        {},
-        {
-          surname: "",
-          surnameAtBirth: "",
-          firstName: "",
-          dateOfBirth: "", // type date
-          placeOfBirth: "",
-          countryOfBirth: "",
-          currentNationality: "",
-          nationalityAtBirth: "", // optional
-          sex: "male",
-          martialStatus: "single",
-          martialStatusOtherValue: "",
-          minorsData: "",
-          nationalIdentityNumber: "",
-          travelDocumentType: "ordinary",
-          travelDocumentTypeOtherValue: "",
-          travelDocumentNumber: "",
-          travelDocumentIssuedDate: "", // type date
-          travelDocumentExpirationDate: "", // type date
-          travelDocumentIssuedBy: "",
-          address: "",
-          email: "", // type email
-          phone: "",
-          otherResidence: "no",
-          otherResidenceDocumentName: "",
-          otherResidenceDocumentNumber: "",
-          otherResidenceExpirationDate: "",
-          isStudent: "no", // pivoting variable
-          currentOccupation: "",
-          employerFullName: "",
-          employerAddress: "",
-          employerPhone: "",
-          educatinoalEstablishmentName: "",
-          educatinoalEstablishmentAddress: "",
-          travelPurpose: "tourism",
-          travelPurposeOtherValue: "",
-          memberDestinationState: "",
-          memberStateFirstEntry: "",
-          entriesRequested: "single",
-          duration: "", // type number
-
-          // Page 2
-
-          previousVisas: "no",
-          previousVisasIssuedOn: null,
-          previousVisasExpiresOn: null,
-          fingerprintsCollected: "no",
-          fingerprintsCollectionDate: null,
-          finalCountryEntryPermitIssuedBy: "",
-          finalCountryEntryPermitIssuedOn: "",
-          finalCountryEntryPermitExpiresOn: "",
-          dateOfArrival: "", // type date
-          dateOfDeparture: "", // type date
-
-          invitingPersonFullNameOrTemporaryAccomodation: "",
-          invitingPersonOrTemporaryAccomodationAddress: "",
-          invitingPersonOrTemporaryAccomodationEmail: "",
-
-          invitingCompanyName: "",
-          invitingCompanyAddress: "",
-          invitingCompanyPhone: "",
-          invitingCompanyFax: "",
-
-          companyReferenceFullName: "",
-          companyReferenceAddress: "",
-          companyReferencePhone: "",
-          companyReferenceFax: "",
-          companyReferenceEmail: "",
-
-          costsCoveredBy: "applicant",
-          meansOfSupport: [],
-          meansOfSupportOtherValue: "",
-
-          familyMemberFullName: "",
-          familyMemberBirthdate: "",
-          familyMemberNationality: "",
-          familyMemberDocumentNumber: "",
-
-          relationshipType: "",
-          signature: "",
-          place: "", // *shared info in two sections
-          date: "", // type date *shared info in two sections
-          visaFeeAcceptance: false, // mandatory
-          insuranceAccepance: false, // mandatory
-          personalDataProcessingAcceptance: false, // mandatory
-          finalAcceptance: false, // mandatory
-        }
-      );
-    },
-
-    resetMeansOfSupportValue() {
-      this.applicationData.meansOfSupport = [];
-    },
-
-    async loadTemplate() {
-      // try {
-      //   const response = await fetch("./templates/template.html"); // Adjust the path
-      //   const text = await response.text();
-      //   console.log("text loaded", text);
-      //   // this.pdfContent = text.replace('{{ title }}', this.title); // Replace placeholders
-      // } catch (error) {
-      //   console.error("Error loading template:", error);
-      // }
-    },
-  },
-};
-</script>
+</html>
